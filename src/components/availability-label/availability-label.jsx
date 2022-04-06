@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Check from "./check";
+import Link from "../utils/link";
 
 /**
  * Availability label component props.
@@ -11,16 +12,10 @@ import Check from "./check";
  * @param {string} props.availabilityText
  * isCurrentlyActive should be a state that is passed down to the component
  * @param {string} props.state
- * onClick should handle the click event, passed from the parent component
- * @param {function} props.onClick
+ * @param {string} props.url
  * @returns {ReactNode}
  */
-const AvailabilityLabel = ({
-  manifestText,
-  availabilityText,
-  state,
-  onClick
-}) => {
+const AvailabilityLabel = ({ manifestText, availabilityText, state, link }) => {
   function availableClass(isAvailable) {
     return isAvailable !== "unavailable" ? "success" : "alert";
   }
@@ -37,15 +32,11 @@ const AvailabilityLabel = ({
     return isActive === "selected" ? "check-icon selected" : "check-icon";
   }
 
-  return (
+  const availabilityLabel = (
     <div
       className={`pagefold-parent--${selectedClassTriangle(
         state
       )} availability-label--${selectedClass(state)} text-label`}
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      onKeyUp={onClick}
     >
       <div
         className={`pagefold-triangle--${selectedClassTriangle(
@@ -61,17 +52,25 @@ const AvailabilityLabel = ({
       <p className="text-label-normal ml-4 mr-8">{availabilityText}</p>
     </div>
   );
+
+  return link ? (
+    <Link href={link} newTab>
+      {availabilityLabel}
+    </Link>
+  ) : (
+    availabilityLabel
+  );
 };
 
 AvailabilityLabel.propTypes = {
   manifestText: PropTypes.string.isRequired,
   availabilityText: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
-  onClick: PropTypes.func
+  link: PropTypes.string
 };
 
 AvailabilityLabel.defaultProps = {
-  onClick: undefined
+  link: undefined
 };
 
 export default AvailabilityLabel;

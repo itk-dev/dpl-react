@@ -29,6 +29,13 @@ const argTypes = {
     control: {
       type: null
     }
+  },
+  link: {
+    name: "Link",
+    type: { required: true },
+    control: {
+      type: "text"
+    }
   }
 };
 
@@ -36,7 +43,8 @@ export const Available = Template.bind({});
 Available.args = {
   manifestText: "bog",
   availabilityText: "hjemme",
-  state: "available"
+  state: "available",
+  link: "https://www.google.com"
 };
 Available.argTypes = argTypes;
 
@@ -44,7 +52,8 @@ export const Selected = Template.bind({});
 Selected.args = {
   manifestText: "lydbog (cd-mp3)",
   availabilityText: "udlånt",
-  state: "selected"
+  state: "selected",
+  link: "https://www.google.com"
 };
 Selected.argTypes = argTypes;
 
@@ -52,6 +61,7 @@ export const Unavailable = Template.bind({});
 Unavailable.args = {
   manifestText: "ebog",
   availabilityText: "online",
-  state: "unavailable"
+  state: "unavailable",
+  link: undefined
 };
 Unavailable.argTypes = argTypes;
