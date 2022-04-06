@@ -1,0 +1,11 @@
+/* stylelint-disable */
+.check-icon {
+  width: 14px;
+  position: absolute;
+  left: 5px;
+  display: none;
+  &.selected {
+    display: inline-block;
+  }
+}
+/* stylelint-enable */
