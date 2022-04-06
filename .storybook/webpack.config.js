@@ -8,6 +8,13 @@ module.exports = async ({ config }) => {
 
   const rules = [
     ...custom.module.rules,
+    // The css loader is only used as a temporary solution
+    // for loading in the dpl.css file in preview.js
+    {
+      test: /\.css$/i,
+      use: ["style-loader", "css-loader"],
+      include: path.resolve(__dirname, "../")
+    },
     // We need to make use of css modules in our stories.
     {
       test: /\.scss$/,
