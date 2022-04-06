@@ -49,7 +49,7 @@ Danish public libraries.
 
 ### Howto
 
-- Run: sudo vim etc/hosts
+- Run: sudo vim /etc/hosts
 - Add as the last line in the doc: 127.0.0.1 ddb-react.docker
 - Now storybook can be started by sudo yarn start:storybook:dev
 
@@ -220,6 +220,12 @@ export function WithoutData() {
 ```bash
   yarn dev
 ```
+
+or
+
+```sudo yarn start:storybook:dev```
+
+depending on your dev environment
 
 </details>
 
