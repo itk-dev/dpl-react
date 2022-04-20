@@ -97,6 +97,7 @@
     "stylelint-scss": "^3.12.1",
     "stylelint-webpack-plugin": "^1.0.3",
     "typescript": "^4.6.3",
+    "svg-url-loader": "^7.1.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-version-file-plugin": "^0.4.0"
@@ -107,6 +108,7 @@
     "@reach/auto-id": "^0.6.1",
     "@reach/dialog": "^0.5.4",
     "@reduxjs/toolkit": "^1.4.0",
+    "@reload/dpl-design-system": "0.0.0-0ede2ac4e55c0a4ce4c960210dcf0a0ddb4fc7af",
     "@storybook/addon-docs": "^6.4.19",
     "lodash": "^4.17.21",
     "prop-types": "^15.7.2",

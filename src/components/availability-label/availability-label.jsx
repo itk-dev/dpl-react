@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Check from "./check";
+import Check from "@reload/dpl-design-system/build/icons/collection/Check.svg";
+
 import Link from "../utils/link";
 
 /**
@@ -20,16 +21,16 @@ const AvailabilityLabel = ({ manifestText, availabilityText, state, link }) => {
     return isAvailable !== "unavailable" ? "success" : "alert";
   }
 
-  function selectedClass(isActive) {
-    return isActive === "selected" ? "selected" : "unselected";
+  function selectedClass(currentState) {
+    return currentState === "selected" ? "selected" : "unselected";
   }
 
-  function selectedClassTriangle(isActive) {
-    return isActive === "selected" ? "none" : "xsmall";
+  function selectedClassTriangle(currentState) {
+    return currentState === "selected" ? "none" : "xsmall";
   }
 
-  function checkIconClasses(isActive) {
-    return isActive === "selected" ? "check-icon selected" : "check-icon";
+  function checkIconClasses(currentState) {
+    return currentState === "selected" ? "selected" : "";
   }
 
   const availabilityLabel = (
@@ -43,10 +44,11 @@ const AvailabilityLabel = ({ manifestText, availabilityText, state, link }) => {
           state
         )} ${availableClass(state)}`}
       />
-      {/* this Check comp is not the final solution. We are going with it for now,
-        because dpl-design-system is not yet ready as a library
-        - check.jsx file will then be deleted as well */}
-      <Check classes={checkIconClasses(state)} />
+      <img
+        className={`availability-label--check ${checkIconClasses(state)}`}
+        src={Check}
+        alt="check-icon"
+      />
       <p className="text-label-semibold ml-24">{manifestText}</p>
       <div className="availability-label--divider ml-4" />
       <p className="text-label-normal ml-4 mr-8">{availabilityText}</p>
