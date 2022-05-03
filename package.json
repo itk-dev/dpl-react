@@ -108,7 +108,7 @@
     "@reach/auto-id": "^0.6.1",
     "@reach/dialog": "^0.5.4",
     "@reduxjs/toolkit": "^1.4.0",
-    "@reload/dpl-design-system": "0.0.0-0ede2ac4e55c0a4ce4c960210dcf0a0ddb4fc7af",
+    "@reload/dpl-design-system": "^0.0.0-b9323ffc8dd206146e186b30b14943fb9e556df7",
     "@storybook/addon-docs": "^6.4.19",
     "clsx": "^1.1.1",
     "lodash": "^4.17.21",

@@ -3123,10 +3123,10 @@
     redux-thunk "^2.3.0"
     reselect "^4.0.0"
 
-"@reload/dpl-design-system@0.0.0-0ede2ac4e55c0a4ce4c960210dcf0a0ddb4fc7af":
-  version "0.0.0-0ede2ac4e55c0a4ce4c960210dcf0a0ddb4fc7af"
-  resolved "https://npm.pkg.github.com/download/@reload/dpl-design-system/0.0.0-0ede2ac4e55c0a4ce4c960210dcf0a0ddb4fc7af/c176238d71cd4675a94eefb744d448a78e11042daac51735f2c78110222544e2#bf8a4db1d797311e60b5af2fdb5a5116abbe87d0"
-  integrity sha512-lQ8j4o9hhcBWlGz2iSi2wEK7qWGjvnfrxt6q9Jw3bKw+ILDKfHiHdgIYC5sFdaHMmPEwrTSYgUqqN2kDqfSYGA==
+"@reload/dpl-design-system@^0.0.0-b9323ffc8dd206146e186b30b14943fb9e556df7":
+  version "0.0.0-b9323ffc8dd206146e186b30b14943fb9e556df7"
+  resolved "https://npm.pkg.github.com/download/@reload/dpl-design-system/0.0.0-b9323ffc8dd206146e186b30b14943fb9e556df7/e0877345956a18e2854e6a0b1905744a6b94c73f137587b9a658dcebede342ac#b746626ce16be1a3dc209bf3ab3325c4cf8e1cec"
+  integrity sha512-SutGy1UKx1TG4WnFuigmc8dPmnW6gvLRcSO0VJxFJP/1ycA7vU0ei66q3VlHdhWjdVjr9LluAbvzgXaR4h3uQg==
 
 "@storybook/addon-controls@^6.4.19":
   version "6.4.19"
