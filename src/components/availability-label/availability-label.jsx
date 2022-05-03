@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Check from "@reload/dpl-design-system/build/icons/collection/Check.svg";
-
+import clsx from "clsx";
 import Link from "../utils/link";
 
 /**
@@ -17,38 +17,38 @@ import Link from "../utils/link";
  * @returns {ReactNode}
  */
 const AvailabilityLabel = ({ manifestText, availabilityText, state, link }) => {
-  function availableClass(isAvailable) {
-    return isAvailable !== "unavailable" ? "success" : "alert";
-  }
+  const triangleState = {
+    available: "success",
+    unavailable: "alert",
+    selected: "alert"
+  };
 
-  function selectedClass(currentState) {
-    return currentState === "selected" ? "selected" : "unselected";
-  }
-
-  function selectedClassTriangle(currentState) {
-    return currentState === "selected" ? "none" : "xsmall";
-  }
-
-  function checkIconClasses(currentState) {
-    return currentState === "selected" ? "selected" : "";
-  }
+  const classes = {
+    parent: clsx(
+      {
+        "pagefold-parent--none availability-label availability-label--selected":
+          state === "selected"
+      },
+      {
+        "pagefold-parent--xsmall availability-label availability-label--unselected":
+          state !== "selected"
+      },
+      "text-label"
+    ),
+    triangle: clsx(
+      { "pagefold-triangle--none": state === "selected" },
+      {
+        [`pagefold-triangle--xsmall pagefold-triangle--xsmall--${triangleState[state]}`]:
+          state !== "selected"
+      }
+    ),
+    check: clsx("availability-label--check", [`${state}`])
+  };
 
   const availabilityLabel = (
-    <div
-      className={`pagefold-parent--${selectedClassTriangle(
-        state
-      )} availability-label--${selectedClass(state)} text-label`}
-    >
-      <div
-        className={`pagefold-triangle--${selectedClassTriangle(
-          state
-        )} ${availableClass(state)}`}
-      />
-      <img
-        className={`availability-label--check ${checkIconClasses(state)}`}
-        src={Check}
-        alt="check-icon"
-      />
+    <div className={classes.parent}>
+      <div className={classes.triangle} />
+      <img className={classes.check} src={Check} alt="check-icon" />
       <p className="text-label-semibold ml-24">{manifestText}</p>
       <div className="availability-label--divider ml-4" />
       <p className="text-label-normal ml-4 mr-8">{availabilityText}</p>
