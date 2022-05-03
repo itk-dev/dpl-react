@@ -6,12 +6,12 @@ import PropTypes from "prop-types";
  * @export
  * @param {object} props
  * @param {string} props.url
- * @param {boolean} props.newTab
+ * @param {boolean} props.isNewTab
  * @returns {ReactNode}
  */
-const Link = ({ href, children, newTab }) => {
+const Link = ({ href, children, isNewTab }) => {
   return (
-    <a href={href} target={newTab ? "_blank" : ""} className="ddb-link">
+    <a href={href} target={isNewTab ? "_blank" : ""} className="hide-linkstyle">
       {children}
     </a>
   );
@@ -20,13 +20,13 @@ const Link = ({ href, children, newTab }) => {
 Link.propTypes = {
   href: PropTypes.string,
   children: PropTypes.element,
-  newTab: PropTypes.element
+  isNewTab: PropTypes.bool
 };
 
 Link.defaultProps = {
   href: undefined,
   children: undefined,
-  newTab: undefined
+  isNewTab: undefined
 };
 
 export default Link;

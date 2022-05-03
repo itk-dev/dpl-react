@@ -53,7 +53,7 @@ Selected.args = {
   manifestText: "lydbog (cd-mp3)",
   availabilityText: "udlånt",
   state: "selected",
-  link: "https://www.google.com"
+  link: undefined
 };
 Selected.argTypes = argTypes;
 

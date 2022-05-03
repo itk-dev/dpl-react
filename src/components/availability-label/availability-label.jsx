@@ -56,7 +56,7 @@ const AvailabilityLabel = ({ manifestText, availabilityText, state, link }) => {
   );
 
   return link ? (
-    <Link href={link} newTab>
+    <Link href={link} isNewTab>
       {availabilityLabel}
     </Link>
   ) : (
