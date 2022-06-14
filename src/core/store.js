@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage/session";
 import userReducer from "./user.slice";
+import modalReducer from "./modal.slice";
 
 const persistConfig = {
   key: "dpl-react",
@@ -12,7 +13,8 @@ export const store = configureStore({
   reducer: persistReducer(
     persistConfig,
     combineReducers({
-      user: userReducer
+      user: userReducer,
+      modal: modalReducer
     })
   ),
   devTools: process.env.NODE_ENV === "development"
