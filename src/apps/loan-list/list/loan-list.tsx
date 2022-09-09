@@ -10,7 +10,7 @@ import {
   sortByLoanDate
 } from "../../../core/utils/helpers/general";
 import { getUrlQueryParam } from "../../../core/utils/helpers/url";
-import { LoanV2 } from "../../../core/fbs/model/loanV2";
+import { LoanV2, LoanDetailsV2 } from "../../../core/fbs/model";
 import { useText } from "../../../core/utils/text";
 import DueDateLoansModal from "../modal/due-date-loans-modal";
 import IconList from "../../../components/icon-list/icon-list";
@@ -18,11 +18,15 @@ import IconStack from "../../../components/icon-stack/icon-stack";
 import { removeLoansWithDuplicateDueDate, queryMatchesFaust } from "../helpers";
 import { ModalIdsProps } from "../../../core/utils/modal";
 import MaterialDetailsModal from "../modal/material-details-modal";
-import { LoanDetailsV2 } from "../../../core/fbs/model";
 import { FaustId } from "../../../core/utils/types/ids";
 import RenewLoansModal from "../modal/renew-loans-modal";
 import LoanListItems from "./loan-list-items";
 import modalIdsConf from "../../../core/configuration/modal-ids.json";
+
+import {
+  setConfig as fbsSetConfig,
+  Options as FbsOptions
+} from "../../../core/fbs/fbaConfig";
 
 export interface ModalMaterialType {
   materialItemNumber: number;
@@ -38,7 +42,13 @@ export interface LoanDetailsType {
   loanDate: string;
 }
 
-const LoanList: FC = () => {
+interface LoanListProps {
+  fbsBaseUrl: string;
+}
+
+const LoanList: FC<LoanListProps> = ({ fbsBaseUrl }) => {
+  fbsSetConfig(FbsOptions.baseUrl, fbsBaseUrl);
+
   const dispatch = useDispatch();
   const t = useText();
   const [loans, setLoans] = useState<LoanV2[]>();
@@ -164,7 +174,7 @@ const LoanList: FC = () => {
 
   return (
     <>
-      {/* only display the list when a modal is not open. this is to do with accessibility, 
+      {/* only display the list when a modal is not open. this is to do with accessibility,
       so the screen reader does not focus on focusable inputs in the list while a modal is open. */}
       {displayList && (
         <>

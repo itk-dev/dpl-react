@@ -1,5 +1,5 @@
 import React, { useState, FC } from "react";
-import { LoanV2 } from "../../../core/fbs/model/loanV2";
+import { LoanV2 } from "../../../core/fbs/model";
 import { removeLoansWithDuplicateDueDate } from "../helpers";
 import { LoanDetailsV2 } from "../../../core/fbs/model";
 import StackableMaterial from "../materials/stackable-material";
