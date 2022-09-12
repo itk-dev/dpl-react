@@ -23,11 +23,6 @@ import RenewLoansModal from "../modal/renew-loans-modal";
 import LoanListItems from "./loan-list-items";
 import modalIdsConf from "../../../core/configuration/modal-ids.json";
 
-import {
-  setConfig as fbsSetConfig,
-  Options as FbsOptions
-} from "../../../core/fbs/fbaConfig";
-
 export interface ModalMaterialType {
   materialItemNumber: number;
   mainText: string;
@@ -42,13 +37,7 @@ export interface LoanDetailsType {
   loanDate: string;
 }
 
-interface LoanListProps {
-  fbsBaseUrl: string;
-}
-
-const LoanList: FC<LoanListProps> = ({ fbsBaseUrl }) => {
-  fbsSetConfig(FbsOptions.baseUrl, fbsBaseUrl);
-
+const LoanList: FC = () => {
   const dispatch = useDispatch();
   const t = useText();
   const [loans, setLoans] = useState<LoanV2[]>();
