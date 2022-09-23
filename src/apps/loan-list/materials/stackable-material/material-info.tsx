@@ -14,7 +14,8 @@ const MaterialInfo: FC<MaterialInfoProps> = ({
   periodical,
   children
 }) => {
-  const { authors, pid, materialType, description, year, title } = material;
+  const { authors, pid, materialType, description, year, title, series } =
+    material;
 
   return (
     <div className="list-reservation__material">
@@ -40,6 +41,7 @@ const MaterialInfo: FC<MaterialInfoProps> = ({
             {authors && authors}
             {periodical && periodical}
             {year && <>({year})</>}
+            {series && <>({series})</>}
           </p>
         </div>
         {children}

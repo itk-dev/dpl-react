@@ -5,4 +5,5 @@ export interface BasicDetailsType {
   description: string | null | undefined;
   year: string | null | undefined;
   title: string | null | undefined;
+  series: string | null | undefined;
 }

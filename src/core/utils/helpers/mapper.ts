@@ -11,6 +11,25 @@ import { LoanV2 } from "../../fbs/model/loanV2";
 import { RenewedLoanV2 } from "../../fbs/model/renewedLoanV2";
 import { LoanMetaDataType } from "../types/loan-meta-data-type";
 
+function getSeriesDisplayString(
+  series?:
+    | {
+        title: string;
+        numberInSeries?: {
+          display: string;
+        } | null;
+      }[]
+    | null
+) {
+  let seriesString = "";
+  if (series && series.length > 0) {
+    series.forEach((s) => {
+      seriesString += `${s.title}: ${s.numberInSeries?.display}, `;
+    });
+  }
+  return seriesString.substring(0, seriesString.length - 2);
+}
+
 // Creates a "by author, author and author"-string
 // String interpolation todo?
 export const getContributors = (creators: string[] | undefined) => {
@@ -84,8 +103,15 @@ export const mapProductToBasicDetailsType = (material: Product) => {
 export const mapManifestationToBasicDetailsType = (
   material: GetMaterialManifestationQuery
 ) => {
-  const { hostPublication, abstract, titles, pid, materialTypes, creators } =
-    material?.manifestation || {};
+  const {
+    hostPublication,
+    abstract,
+    titles,
+    pid,
+    materialTypes,
+    creators,
+    series
+  } = material?.manifestation || {};
 
   const description = abstract ? abstract[0] : "";
   const {
@@ -100,7 +126,8 @@ export const mapManifestationToBasicDetailsType = (
     title: mainText,
     year,
     description,
-    materialType: materialTypes ? materialTypes[0].specific : undefined
+    materialType: materialTypes ? materialTypes[0].specific : undefined,
+    series: getSeriesDisplayString(series)
   } as BasicDetailsType;
 };
 

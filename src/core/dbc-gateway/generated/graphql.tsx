@@ -44,6 +44,10 @@ export enum AccessTypeCode {
 
 export type AccessUrl = {
   __typename?: "AccessUrl";
+  /** If the resource requires login */
+  loginRequired: Scalars["Boolean"];
+  /** Notes for the resource */
+  note?: Maybe<Scalars["String"]>;
   /** The origin, e.g. "DBC Webarkiv" */
   origin: Scalars["String"];
   /** The url where manifestation is located */
@@ -163,6 +167,8 @@ export type Creator = {
   display: Scalars["String"];
   /** Name of the creator which can be used to sort after  */
   nameSort: Scalars["String"];
+  /** A list of which kinds of contributions this creator made to this creation */
+  roles: Array<Role>;
 };
 
 export type Dk5MainEntry = {
@@ -352,6 +358,7 @@ export enum InfomediaError {
   ErrorInRequest = "ERROR_IN_REQUEST",
   InternalServerError = "INTERNAL_SERVER_ERROR",
   LibraryNotFound = "LIBRARY_NOT_FOUND",
+  NoMunicipality = "NO_MUNICIPALITY",
   ServiceNotLicensed = "SERVICE_NOT_LICENSED",
   ServiceUnavailable = "SERVICE_UNAVAILABLE"
 }
@@ -472,7 +479,7 @@ export type Manifestation = {
   /** Additional creators of this manifestation as described on the publication. E.g. 'tekst af William Warren' */
   creatorsFromDescription: Array<Scalars["String"]>;
   /** Edition details for this manifestation */
-  edition: Edition;
+  edition?: Maybe<Edition>;
   /** Overall literary category/genre of this manifestation. e.g. fiction or nonfiction. In Danish skønlitteratur/faglitteratur for literature, fiktion/nonfiktion for other types. */
   fictionNonfiction?: Maybe<FictionNonfiction>;
   /** The genre, (literary) form, type etc. of this manifestation */
@@ -575,6 +582,7 @@ export type ManifestationTitles = {
 export type Manifestations = {
   __typename?: "Manifestations";
   all: Array<Manifestation>;
+  bestRepresentation: Manifestation;
   first: Manifestation;
   latest: Manifestation;
 };
@@ -1129,6 +1137,14 @@ export type GetMaterialManifestationQuery = {
       | { __typename?: "Corporation"; display: string }
       | { __typename?: "Person"; display: string }
     >;
+    series: Array<{
+      __typename?: "Series";
+      title: string;
+      numberInSeries?: {
+        __typename?: "NumberInSeries";
+        display: string;
+      } | null;
+    }>;
   } | null;
 };
 
@@ -1263,7 +1279,7 @@ export type GetMaterialQuery = {
           | { __typename?: "Corporation"; display: string }
           | { __typename?: "Person"; display: string }
         >;
-        edition: { __typename?: "Edition"; summary: string };
+        edition?: { __typename?: "Edition"; summary: string } | null;
         audience?: {
           __typename?: "Audience";
           generalAudience: Array<string>;
@@ -1321,7 +1337,7 @@ export type GetMaterialQuery = {
           | { __typename?: "Corporation"; display: string }
           | { __typename?: "Person"; display: string }
         >;
-        edition: { __typename?: "Edition"; summary: string };
+        edition?: { __typename?: "Edition"; summary: string } | null;
         audience?: {
           __typename?: "Audience";
           generalAudience: Array<string>;
@@ -1452,7 +1468,7 @@ export type SearchWithPaginationQuery = {
             | { __typename?: "Corporation"; display: string }
             | { __typename?: "Person"; display: string }
           >;
-          edition: { __typename?: "Edition"; summary: string };
+          edition?: { __typename?: "Edition"; summary: string } | null;
           audience?: {
             __typename?: "Audience";
             generalAudience: Array<string>;
@@ -1516,7 +1532,7 @@ export type SearchWithPaginationQuery = {
             | { __typename?: "Corporation"; display: string }
             | { __typename?: "Person"; display: string }
           >;
-          edition: { __typename?: "Edition"; summary: string };
+          edition?: { __typename?: "Edition"; summary: string } | null;
           audience?: {
             __typename?: "Audience";
             generalAudience: Array<string>;
@@ -1610,7 +1626,7 @@ export type ManifestationsSimpleFragment = {
       | { __typename?: "Corporation"; display: string }
       | { __typename?: "Person"; display: string }
     >;
-    edition: { __typename?: "Edition"; summary: string };
+    edition?: { __typename?: "Edition"; summary: string } | null;
     audience?: {
       __typename?: "Audience";
       generalAudience: Array<string>;
@@ -1665,7 +1681,7 @@ export type ManifestationsSimpleFragment = {
       | { __typename?: "Corporation"; display: string }
       | { __typename?: "Person"; display: string }
     >;
-    edition: { __typename?: "Edition"; summary: string };
+    edition?: { __typename?: "Edition"; summary: string } | null;
     audience?: {
       __typename?: "Audience";
       generalAudience: Array<string>;
@@ -1722,7 +1738,7 @@ export type ManifestationsSimpleFieldsFragment = {
     | { __typename?: "Corporation"; display: string }
     | { __typename?: "Person"; display: string }
   >;
-  edition: { __typename?: "Edition"; summary: string };
+  edition?: { __typename?: "Edition"; summary: string } | null;
   audience?: { __typename?: "Audience"; generalAudience: Array<string> } | null;
   physicalDescriptions: Array<{
     __typename?: "PhysicalDescription";
@@ -1826,7 +1842,7 @@ export type WorkSmallFragment = {
         | { __typename?: "Corporation"; display: string }
         | { __typename?: "Person"; display: string }
       >;
-      edition: { __typename?: "Edition"; summary: string };
+      edition?: { __typename?: "Edition"; summary: string } | null;
       audience?: {
         __typename?: "Audience";
         generalAudience: Array<string>;
@@ -1881,7 +1897,7 @@ export type WorkSmallFragment = {
         | { __typename?: "Corporation"; display: string }
         | { __typename?: "Person"; display: string }
       >;
-      edition: { __typename?: "Edition"; summary: string };
+      edition?: { __typename?: "Edition"; summary: string } | null;
       audience?: {
         __typename?: "Audience";
         generalAudience: Array<string>;
@@ -2025,7 +2041,7 @@ export type WorkMediumFragment = {
         | { __typename?: "Corporation"; display: string }
         | { __typename?: "Person"; display: string }
       >;
-      edition: { __typename?: "Edition"; summary: string };
+      edition?: { __typename?: "Edition"; summary: string } | null;
       audience?: {
         __typename?: "Audience";
         generalAudience: Array<string>;
@@ -2080,7 +2096,7 @@ export type WorkMediumFragment = {
         | { __typename?: "Corporation"; display: string }
         | { __typename?: "Person"; display: string }
       >;
-      edition: { __typename?: "Edition"; summary: string };
+      edition?: { __typename?: "Edition"; summary: string } | null;
       audience?: {
         __typename?: "Audience";
         generalAudience: Array<string>;
@@ -2301,6 +2317,12 @@ export const GetMaterialManifestationDocument = `
     }
     creators {
       display
+    }
+    series {
+      title
+      numberInSeries {
+        display
+      }
     }
   }
 }
