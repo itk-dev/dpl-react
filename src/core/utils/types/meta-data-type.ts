@@ -10,4 +10,5 @@ export type MetaDataType<
   type: MaterialClassification;
   loanSpecific?: Extra & LoanMetaDataType;
   reservationSpecific?: Extra & ReservationMetaDataType;
+  periodical: string | null;
 };

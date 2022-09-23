@@ -43,7 +43,12 @@ const ReservationMaterial: FC<ReservationMaterialProps & MaterialProps> = ({
           onClick={(e) => openDetailsModal(e)}
           className="list-reservation my-32"
         >
-          {material && <MaterialInfo material={material} />}
+          {material && (
+            <MaterialInfo
+              material={material}
+              periodical={loanMetaData.periodical || ""}
+            />
+          )}
           <ReservationInfo reservationInfo={loanMetaData.reservationSpecific} />
         </button>
       )}

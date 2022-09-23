@@ -5,10 +5,15 @@ import { BasicDetailsType } from "../../../../core/utils/types/basic-details-typ
 
 interface MaterialInfoProps {
   material: BasicDetailsType;
+  periodical: string;
   children?: ReactNode;
 }
 
-const MaterialInfo: FC<MaterialInfoProps> = ({ material, children }) => {
+const MaterialInfo: FC<MaterialInfoProps> = ({
+  material,
+  periodical,
+  children
+}) => {
   const { authors, pid, materialType, description, year, title } = material;
 
   return (
@@ -33,6 +38,7 @@ const MaterialInfo: FC<MaterialInfoProps> = ({ material, children }) => {
           <h3 className="text-header-h4">{title}</h3>
           <p className="text-small-caption color-secondary-gray">
             {authors && authors}
+            {periodical && periodical}
             {year && <>({year})</>}
           </p>
         </div>

@@ -96,7 +96,10 @@ const StackableMaterial: FC<StackableMaterialProps & MaterialProps> = ({
         }`}
       >
         {material && (
-          <MaterialInfo material={material}>
+          <MaterialInfo
+            material={material}
+            periodical={loanMetaData.periodical || ""}
+          >
             <AdditionalMaterialsButton
               label={t("loanListMaterialsDesktopText")}
               openDueDateModal={openDueDateModal}
