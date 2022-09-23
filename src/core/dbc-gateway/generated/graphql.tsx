@@ -1142,7 +1142,7 @@ export type GetMaterialManifestationQuery = {
       title: string;
       numberInSeries?: {
         __typename?: "NumberInSeries";
-        display: string;
+        number?: Array<number> | null;
       } | null;
     }>;
   } | null;
@@ -2321,7 +2321,7 @@ export const GetMaterialManifestationDocument = `
     series {
       title
       numberInSeries {
-        display
+        number
       }
     }
   }

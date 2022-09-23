@@ -38,10 +38,11 @@ const MaterialInfo: FC<MaterialInfoProps> = ({
         <div className="list-reservation__about">
           <h3 className="text-header-h4">{title}</h3>
           <p className="text-small-caption color-secondary-gray">
-            {authors && authors}
-            {periodical && periodical}
-            {year && <>({year})</>}
-            {series && <>({series})</>}
+            <div>
+              {authors && authors} {year && <>({year})</>}
+            </div>
+            <div>{periodical && periodical}</div>
+            <div>{series && series}</div>
           </p>
         </div>
         {children}

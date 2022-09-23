@@ -19,7 +19,7 @@ query getMaterialManifestation($faust: String!) {
     series {
       title
       numberInSeries {
-        display
+        number
       }
     }
   }

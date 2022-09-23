@@ -16,15 +16,18 @@ function getSeriesDisplayString(
     | {
         title: string;
         numberInSeries?: {
-          display: string;
+          number?: Array<number> | null;
         } | null;
       }[]
     | null
 ) {
   let seriesString = "";
   if (series && series.length > 0) {
-    series.forEach((s) => {
-      seriesString += `${s.title}: ${s.numberInSeries?.display}, `;
+    series.forEach(({ numberInSeries, title }) => {
+      const number = numberInSeries?.number || [];
+      if (number.length > 0) {
+        seriesString += `${title}: ${number[0]}, `;
+      }
     });
   }
   return seriesString.substring(0, seriesString.length - 2);
@@ -146,9 +149,11 @@ export const mapFBSReservationToLoanMetaDataType = (
       numberInQueue,
       state,
       pickupBranch,
-      pickupDeadline
+      pickupDeadline,
+      periodical
     }) => {
       return {
+        periodical: periodical?.displayText || null,
         id: recordId as FaustId,
         type: "physical",
         reservationSpecific: {
@@ -190,6 +195,7 @@ export const mapPublizonReservationToLoanMetaDataType = (
       return {
         id: identifier as FaustId, // or identifier ?
         type: "digital",
+        periodical: null,
         reservationSpecific: {
           dateOfReservation: createdDateUtc,
           expiryDate: expireDateUtc,
@@ -211,6 +217,7 @@ export const mapPublizonLoanToLoanMetaDataType = (
   return list.map(({ loanExpireDateUtc, orderDateUtc, libraryBook }) => {
     return {
       type: "digital",
+      periodical: null,
       id: libraryBook?.identifier as FaustId,
       loanSpecific: {
         dueDate: loanExpireDateUtc,
@@ -234,6 +241,7 @@ export const mapFBSLoanToLoanMetaDataType = (
   return list.map(({ loanDetails, isRenewable, renewalStatusList }) => {
     return {
       type: "physical",
+      periodical: loanDetails.periodical?.displayText || null,
       id: loanDetails.recordId as FaustId,
       loanSpecific: {
         dueDate: loanDetails.dueDate,
@@ -259,6 +267,7 @@ export const mapFBSRenewedLoanToLoanMetaDataType = (
     return {
       type: "physical",
       id: loanDetails.recordId as FaustId,
+      periodical: null,
       loanSpecific: {
         dueDate: loanDetails.dueDate,
         loanDate: loanDetails.loanDate,
