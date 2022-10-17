@@ -9,6 +9,9 @@ import MaterialInfo from "../../loan-list/materials/stackable-material/material-
 import MaterialDetailsModal from "../../loan-list/modal/material-details-modal";
 import ReservationDetails from "../modal/reservation-details";
 import { useModalButtonHandler } from "../../../core/utils/modal";
+import { useConfig } from "../../../core/utils/config";
+import { AgencyBranch } from "../../../core/fbs/model";
+import { excludeBlacklistedBranches } from "../../../components/reservation/helper";
 
 export interface ReservationMaterialProps {
   reservation: ReservationType;
@@ -19,6 +22,22 @@ const ReservationMaterial: FC<ReservationMaterialProps & MaterialProps> = ({
   reservation
 }) => {
   const { open } = useModalButtonHandler();
+
+  const config = useConfig();
+  let branchesFromConfig = config<AgencyBranch>("branchesConfig", {
+    transformer: "jsonParse"
+  });
+
+  const blacklistBranches = config<string>("blacklistedPickupBranchesConfig", {
+    transformer: "stringToArray"
+  });
+
+  if (Array.isArray(blacklistBranches)) {
+    branchesFromConfig = excludeBlacklistedBranches(
+      branchesFromConfig,
+      blacklistBranches
+    );
+  }
 
   function stopPropagationFunction(e: Event | MouseEvent) {
     e.stopPropagation();
@@ -60,11 +79,15 @@ const ReservationMaterial: FC<ReservationMaterialProps & MaterialProps> = ({
               isbnForCover={reservation.identifier || ""}
             />
           )}
-          <ReservationInfo reservationInfo={reservation} />
+          <ReservationInfo
+            branches={branchesFromConfig}
+            reservationInfo={reservation}
+          />
         </button>
       )}
       <MaterialDetailsModal modalEntity={reservation} material={material}>
         <ReservationDetails
+          branches={branchesFromConfig}
           faust={reservation.faust}
           identifier={reservation.identifier}
           reservation={reservation}
