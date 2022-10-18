@@ -136,6 +136,14 @@ export default {
       defaultValue: "Luk materialedetalje modal",
       control: { type: "text" }
     },
+    materialDetailsButtonRenewedText: {
+      defaultValue: "Fornyet",
+      control: { type: "text" }
+    },
+    materialDetailsButtonNotRenewableText: {
+      defaultValue: "Kan ikke fornyes",
+      control: { type: "text" }
+    },
     renewLoanModalDescriptionText: {
       defaultValue: "Denne modal gør det muligt at forny lån",
       control: { type: "text" }
@@ -267,23 +275,23 @@ const Template: ComponentStory<typeof LoanList> = (props) => (
 export const LoanListEntry = Template.bind({});
 LoanListEntry.args = {};
 
-export const LoanListDetailsModal = Template.bind({});
-LoanListDetailsModal.parameters = {
-  query: {
-    modal: "28847238"
-  }
-};
+// export const LoanListDetailsModal = Template.bind({});
+// LoanListDetailsModal.parameters = {
+//   query: {
+//     modal: "28847238"
+//   }
+// };
 
-export const LoanListDueDateModal = Template.bind({});
-LoanListDueDateModal.parameters = {
-  query: {
-    modal: "2022-09-16"
-  }
-};
+// export const LoanListDueDateModal = Template.bind({});
+// LoanListDueDateModal.parameters = {
+//   query: {
+//     modal: "2022-09-16"
+//   }
+// };
 
-export const LoanListRenewLoansModal = Template.bind({});
-LoanListRenewLoansModal.parameters = {
-  query: {
-    modal: modalIdsConf.allLoansId
-  }
-};
+// export const LoanListRenewLoansModal = Template.bind({});
+// LoanListRenewLoansModal.parameters = {
+//   query: {
+//     modal: modalIdsConf.allLoansId
+//   }
+// };

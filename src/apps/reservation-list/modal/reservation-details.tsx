@@ -10,6 +10,7 @@ import ReservationDetailsRedirect from "./reservation-details-redirect";
 import DigitalListDetails from "./digital-list-details";
 import PhysicalListDetails from "./physical-list-details";
 import { AgencyBranch } from "../../../core/fbs/model";
+import { useText } from "../../../core/utils/text";
 
 export interface ReservationDetailsProps {
   reservation: ReservationType;
@@ -21,6 +22,7 @@ const ReservationDetails: FC<ReservationDetailsProps & MaterialProps> = ({
   material,
   branches
 }) => {
+  const t = useText();
   const { state, identifier, numberInQueue } = reservation;
 
   const { authors, pid, year, title, description, materialType } =
@@ -39,9 +41,14 @@ const ReservationDetails: FC<ReservationDetailsProps & MaterialProps> = ({
             title={title}
             pid={pid}
             description={description}
-            readyForPickup={state === "readyForPickup"}
             materialType={materialType}
-          />
+          >
+            {state === "readyForPickup" && (
+              <div className="status-label status-label--info">
+                {t("reservationDetailsReadyForLoanText")}
+              </div>
+            )}
+          </ModalDetailsHeader>
           {reservation.reservationId && (
             <ReservationDetailsButton
               reservationId={reservation.reservationId}
