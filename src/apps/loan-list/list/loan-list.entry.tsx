@@ -2,10 +2,14 @@ import React, { FC } from "react";
 import LoanList from "./loan-list";
 import { withText } from "../../../core/utils/text";
 import { withUrls } from "../../../core/utils/url";
+import { getPageSize } from "../../search-result/helpers";
 
-export interface LoanListEntryProps {
+export interface LoanListEntryConfigProps {
   fbsBaseUrlConfig: string;
   publizonBaseUrlConfig: string;
+}
+
+export interface LoanListEntryTextProps {
   loanListTitleText: string;
   loanListPhysicalLoansTitleText: string;
   loanListDigitalLoansTitleText: string;
@@ -67,7 +71,26 @@ export interface LoanListEntryProps {
   publizonPodcastText: string;
   publizonEbookText: string;
 }
+export interface LoanListEntryProps
+  extends LoanListEntryTextProps,
+    LoanListEntryConfigProps {
+  pageSizeDesktop?: number;
+  pageSizeMobile?: number;
+}
 
-const LoanListEntry: FC<LoanListEntryProps> = () => <LoanList />;
+const LoanListEntry: React.FC<LoanListEntryProps> = ({
+  pageSizeDesktop,
+  pageSizeMobile
+}) => {
+  // Get number of result items to be shown.
+  // If the number of items has been defined with data attributes use those
+  // otherwise get them from the configuration.
+  const pageSize = getPageSize({
+    desktop: pageSizeDesktop,
+    mobile: pageSizeMobile
+  });
+
+  return <LoanList pageSize={pageSize} />;
+};
 
 export default withUrls(withText(LoanListEntry));
