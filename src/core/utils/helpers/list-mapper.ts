@@ -4,8 +4,8 @@ import { GetMaterialManifestationQuery } from "../../dbc-gateway/generated/graph
 import { BasicDetailsType } from "../types/basic-details-type";
 import { Product, Loan, Reservation } from "../../publizon/model";
 import { LoanType } from "../types/loan-type";
-import { ReservationType } from "../types/reservation-type";
 import { store } from "../../store";
+import { ReservationType } from "../types/reservation-type";
 
 // Creates a "by author, author and author"-string
 // String interpolation todo?
@@ -32,7 +32,6 @@ export const getContributors = (creators: string[]) => {
   return returnContentString;
 };
 
-//
 function getYearFromDataString(date: string) {
   return new Date(date).getFullYear();
 }
@@ -190,12 +189,14 @@ export const mapPublizonReservationToReservationType = (
         5: "expired" // in publizon Expired
       };
 
+      const state = status ? publizonReservationState[status] : null;
+
       return {
         identifier,
         faust: null,
         dateOfReservation: createdDateUtc,
         expiryDate: expireDateUtc,
-        state: status ? publizonReservationState[status] : "",
+        state,
         pickupDeadline: expectedRedeemDateUtc
       };
     }
