@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, FC, MouseEvent } from "react";
+import React, { useCallback, FC, MouseEvent } from "react";
 import fetchMaterial, {
   MaterialProps
 } from "../../loan-list/materials/utils/material-fetch-hoc";
@@ -39,27 +39,11 @@ const ReservationMaterial: FC<ReservationMaterialProps & MaterialProps> = ({
     );
   }
 
-  function stopPropagationFunction(e: Event | MouseEvent) {
-    e.stopPropagation();
-  }
-
   const { faust, identifier } = reservation;
-
-  useEffect(() => {
-    document
-      .querySelector(".list-reservation a")
-      ?.addEventListener("click", stopPropagationFunction, true);
-
-    return () => {
-      document
-        .querySelector(".list-reservation a")
-        ?.removeEventListener("click", stopPropagationFunction, true);
-    };
-  }, []);
 
   const openDetailsModal = useCallback(
     (e: MouseEvent) => {
-      stopPropagationFunction(e);
+      e.stopPropagation();
       open(faust || identifier || "");
     },
     [faust, identifier, open]
