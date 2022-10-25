@@ -25,10 +25,11 @@ const ReservationMaterial: FC<ReservationMaterialProps & MaterialProps> = ({
 
   const config = useConfig();
 
-  const inputBranches = config<AgencyBranch>("branchesConfig", {
+  const inputBranches = config<AgencyBranch[]>("branchesConfig", {
     transformer: "jsonParse"
   });
-  const blacklistBranches = config<string>("blacklistedPickupBranchesConfig", {
+
+  const blacklistBranches = config("blacklistedPickupBranchesConfig", {
     transformer: "stringToArray"
   });
 
