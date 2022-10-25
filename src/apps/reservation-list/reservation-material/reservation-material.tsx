@@ -49,22 +49,20 @@ const ReservationMaterial: FC<ReservationMaterialProps & MaterialProps> = ({
   );
 
   return (
-    <div>
-      {reservation && (
-        <button
-          type="button"
-          onClick={(e) => openDetailsModal(e)}
-          className="list-reservation my-32"
-        >
-          {material && (
-            <MaterialInfo
-              material={material}
-              isbnForCover={reservation.identifier || ""}
-            />
-          )}
-          <ReservationInfo branches={branches} reservationInfo={reservation} />
-        </button>
-      )}
+    <>
+      <button
+        type="button"
+        onClick={(e) => openDetailsModal(e)}
+        className="list-reservation my-32"
+      >
+        {material && (
+          <MaterialInfo
+            material={material}
+            isbnForCover={reservation.identifier || ""}
+          />
+        )}
+        <ReservationInfo branches={branches} reservationInfo={reservation} />
+      </button>
       <MaterialDetailsModal modalEntity={reservation} material={material}>
         <ReservationDetails
           branches={branches}
@@ -73,7 +71,7 @@ const ReservationMaterial: FC<ReservationMaterialProps & MaterialProps> = ({
           reservation={reservation}
         />
       </MaterialDetailsModal>
-    </div>
+    </>
   );
 };
 
