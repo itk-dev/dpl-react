@@ -111,6 +111,9 @@ export const useText = (): UseTextFunction => {
       case "plural":
         // If count is 1 we select the first text entry
         // otherwise we select the second text entry.
+        if (count === 0) {
+          return processedTexts[1];
+        }
         return processedTexts[1 % (count ?? 1)];
       case "simple":
       default:
