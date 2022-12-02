@@ -54,7 +54,7 @@ export const fetcher = async <ResponseType>({
   signal?: AbortSignal;
 }) => {
   const token = getToken(TOKEN_USER_KEY) ?? getToken(TOKEN_LIBRARY_KEY);
-  const baseUrlFromConfig = getFetcherUrl(configTypes.dplCms);
+  const baseUrlFromConfig = getFetcherUrl("dplCmsBaseUrl");
   const baseURL = baseUrlFromConfig || defaultBaseUrl;
 
   const authHeaders = token

@@ -18,11 +18,11 @@ export default {
       defaultValue: "https://unsplash.com/photos/wd6YQy0PJt8", // open source image of a red panda
       control: { type: "text" }
     },
-    [configTypes.fbs]: {
+    fbsBaseUrl: {
       defaultValue: "",
       control: { type: "text" }
     },
-    [configTypes.publizon]: {
+    publizonBaseUrl: {
       defaultValue: "",
       control: { type: "text" }
     },

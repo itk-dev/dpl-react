@@ -8,11 +8,11 @@ export default {
   component: PatronPage,
   argTypes: {
     // Config
-    [configTypes.fbs]: {
+    fbsBaseUrl: {
       defaultValue: "",
       control: { type: "text" }
     },
-    [configTypes.publizon]: {
+    publizonBaseUrl: {
       defaultValue: "",
       control: { type: "text" }
     },

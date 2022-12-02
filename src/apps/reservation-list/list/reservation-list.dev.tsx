@@ -19,11 +19,11 @@ export default {
       defaultValue: 10,
       control: { type: "number" }
     },
-    [configTypes.fbs]: {
+    fbsBaseUrl: {
       defaultValue: "",
       control: { type: "text" }
     },
-    [configTypes.publizon]: {
+    publizonBaseUrl: {
       defaultValue: "",
       control: { type: "text" }
     },
