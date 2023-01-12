@@ -85,7 +85,7 @@ const SearchResultListItem: React.FC<SearchResultListItemProps> = ({
       })
     );
   };
-
+  console.log(showItem);
   return (
     // We know that is not following a11y recommendations to have an onclick
     // handler on a non-interactive element.
