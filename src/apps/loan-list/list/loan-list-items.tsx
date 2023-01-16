@@ -31,7 +31,7 @@ const LoanListItems: FC<LoanListItemProps> = ({
       ref={itemRef}
       className="list-reservation-container my-32"
       style={{
-        height: "10px"
+        minHeight: "10px"
       }}
     >
       {showItem && (
