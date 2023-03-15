@@ -63,6 +63,7 @@ export interface ReservationListTextProps {
   reservationDetailsDateOfReservationTitleText: string;
   reservationDetailsReadyForLoanText: string;
   reservationDetailsRemoveDigitalReservationText: string;
+  reservationDetailAllowRemoveReadyReservationsConfig: boolean;
   deleteReservationModalHeaderText: string;
   deleteReservationModalDeleteQuestionText: string;
   deleteReservationModalNotRegrettableText: string;
